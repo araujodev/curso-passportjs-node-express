@@ -25,4 +25,8 @@ User.methods.genHash = password => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(7), null)
 }
 
+User.methods.validateUser = (password, callback) => {
+  return bcrypt.compare(password, this.password, callback)
+}
+
 module.exports = mongoose.model("User", User)
