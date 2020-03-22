@@ -32,6 +32,7 @@ app.use(
 )
 
 //Passport.js
+require("./src/auth/local")(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -40,7 +41,7 @@ app.set("view engine", "pug")
 app.set("views", path.join(__dirname, "src/view"))
 
 //Global Router
-require("./src/index")(app)
+require("./src/index")(app, passport)
 
 //Mongooose Config
 mongoose.connect("mongodb://localhost:27017/auth")
