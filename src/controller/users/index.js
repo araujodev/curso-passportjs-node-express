@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
+const isAuth = require("./../../auth/middleware");
 
 module.exports = passport => {
-  router.get("/", require("./all"))
+  router.get("/", isAuth, require("./all"))
   //router.post("/", require("./store"))
   router.post(
     "/",
@@ -11,7 +12,7 @@ module.exports = passport => {
       failureRedirect: "/users"
     })
   )
-  router.get("/create", require("./create"))
-  router.delete("/:id", require("./destroy"))
+  router.get("/create", isAuth, require("./create"))
+  router.delete("/:id", isAuth, require("./destroy"))
   return router
 }
